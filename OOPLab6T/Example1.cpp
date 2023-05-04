@@ -14,7 +14,7 @@ namespace SpaceExample1 {
     public:
         Base() : dat(1) {}
         Base(int d) : dat(d) {}
-        Base(int a1, int a2, int a3, double a4, int a5) {
+        Base(int a1, int a2, int a3, double a4, int a5) : dat(1) {
             a[0] = a1;
             a[1] = a2;
             a[2] = a3;
@@ -31,7 +31,7 @@ namespace SpaceExample1 {
         D1() : d1(1) {}
         D1(int d) : d1(d) {}
         D1(int d, int dt) : Base(dt), d1(d) {}
-        D1(int a, int b, int c, double d, int e) : Base(a, b, c, d, e), d1(d) {}
+        D1(int a, int b, int c, double d, int e) : Base(a, b, c, d, e), d1(1) {}
 
     };
 
@@ -63,7 +63,7 @@ namespace SpaceExample1 {
     public:
         D4() : dt(1) {}
         D4(int d) : dt(d) {}
-        D4(int a, int b, int c, double d, int e) : D1(a, b, c, d, e) {}
+        D4(int a, int b, int c, double d, int e) : D1(a, b, c, d, e), dt(d) {}
         void showDat()
         {
             std::cout << "dat =? Error C2385 ambiguous access level dat " << std::endl;
@@ -137,7 +137,7 @@ namespace SpaceExample1 {
     public:
         D4V() : dt(1) {}
         D4V(int d) : dt(d) {}
-        D4V(int a, int b, int c, double d, int e) : D1V(a, b, c, d, e) {}
+        D4V(int a, int b, int c, double d, int e) : D1V(a, b, c, d, e) ,dt(d) {}
     };
 
 
