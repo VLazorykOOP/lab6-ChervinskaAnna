@@ -43,6 +43,7 @@ namespace SpaceExample1 {
         D2() : d2(1) {}
         D2(int d) : d2(d) {}
         D2(int d, double dt) : Base(d), d2(dt) {}
+        D2(int a, int b, int c, double d, int e) : Base(a, b, c, d, e), d2(d) {}
     };
 
     class D3 : protected D1, protected D2
@@ -82,6 +83,7 @@ namespace SpaceExample1 {
         D5() : d5(1) {}
         D5(int d) : d5(d) {}
         D5(int d, int dt) : D1(d), D3(d), d5(d) {}
+        D5(int a, int b, int c, double d, int e) : D1(a, b, c, d, e), d5(d) {}
     };
 
     class D6 : protected D2, protected D4
@@ -92,6 +94,7 @@ namespace SpaceExample1 {
         D6() : d6(1) {}
         D6(int d) : d6(d) {}
         D6(int d, int dt) : D2(d), D4(d), d6(d) {}
+        D6(int a, int b, int c, double d, int e) : D2(a, b, c, d, e), D4(a, b, c, d, e), d6(d) {}
     };
     /*****virtual*****/
 
@@ -114,6 +117,7 @@ namespace SpaceExample1 {
         D2V() : d2(1) {}
         D2V(int d) : d2(d) {}
         D2V(int d, double dt) : Base(d), d2(dt) {}
+        D2V(int a, int b, int c, double d, int e) : Base(a, b, c, d, e), d2(d) {}
     };
 
     class D3V :virtual protected D1V, virtual protected D2V
@@ -145,6 +149,7 @@ namespace SpaceExample1 {
         D5V() : d5(1) {}
         D5V(int d) : d5(d) {}
         D5V(int d, int dt) : D1V(d), D3V(d), d5(d) {}
+        D5V(int a, int b, int c, double d, int e) : D1V(a, b, c, d, e), d5(d) {}
     };
 
     class D6V : virtual protected D2V, virtual protected D4V
@@ -155,6 +160,7 @@ namespace SpaceExample1 {
         D6V() : d6(1) {}
         D6V(int d) : d6(d) {}
         D6V(int d, int dt) : D2V(d), D4V(d), d6(d) {}
+        D6V(int a, int b, int c, double d, int e) : D2V(a, b, c, d, e), d6(d)   {}
     };
 
     //class D2V : virtual protected Base
@@ -199,28 +205,26 @@ namespace SpaceExample1 {
     {
         std::cout << " Example1  \n";
         D5 a, b(1, 2, 3, 4.5, 5);
-        D6 a, b(1, 2, 3, 4.5, 5);
-        RV3 av, bv(1, 2, 3, 4.5, 5);
+        D6 c, d(1, 2, 3, 4.5, 5);
+        D4V av, bv(1, 2, 3, 4.5, 5);
 
         std::cout << "Test !\n";
         std::cout << "Size for Base " << sizeof(Base) << std::endl;
         std::cout << "Size for D1 " << sizeof(D1) << std::endl;
         std::cout << "Size for D2 " << sizeof(D2) << std::endl;
-        std::cout << "Size for D12 " << sizeof(D12) << std::endl;
-        std::cout << "Size for R " << sizeof(R) << std::endl;
+        std::cout << "Size for D3 " << sizeof(D3) << std::endl;
+        std::cout << "Size for D4 " << sizeof(D4) << std::endl;
+        std::cout << "Size for D5 " << sizeof(D5) << std::endl;
+        std::cout << "Size for D6 " << sizeof(D6) << std::endl;
 
         std::cout << "Size for Base " << sizeof(Base) << std::endl;
         std::cout << "Size for D1V " << sizeof(D1V) << std::endl;
         std::cout << "Size for D2V " << sizeof(D2V) << std::endl;
-        std::cout << "Size for D12VV " << sizeof(D12VV) << std::endl;
-        std::cout << "Size for RV3 " << sizeof(RV3) << std::endl;
+        std::cout << "Size for D3V " << sizeof(D3V) << std::endl;
+        std::cout << "Size for D4V " << sizeof(D4V) << std::endl;
+        std::cout << "Size for D5V " << sizeof(D5V) << std::endl;
+        std::cout << "Size for D6V " << sizeof(D6V) << std::endl;
 
-        std::cout << "Size for object class R " << sizeof(R) << " or  "
-            << sizeof(a) << " or  " << sizeof(b) << std::endl;
-        std::cout << "Size for object class RV3 " << sizeof(RV3) << " or  "
-            << sizeof(av) << " or  " << sizeof(bv) << std::endl;
-        b.showDat();
-        bv.showDat();
         return 0;
     }
 
