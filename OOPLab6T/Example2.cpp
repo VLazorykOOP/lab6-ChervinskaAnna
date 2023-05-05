@@ -63,7 +63,7 @@ namespace SpaceExample2 {
         int getRoots(double* roots) {
             double D, t;
             double t1, t2;
-            int numRoots;
+            int numRoots=0;
             D = B * B - 4 * A * C;
             if (D == 0) {
                 t = -B / (2 * A);

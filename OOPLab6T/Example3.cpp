@@ -9,85 +9,103 @@ namespace SpaceExample3 {
 //
 
 
-    class Car {
-    protected:
-        string marka;
-        float power;
-        int numberOfWheels;
+    class Transport {
     public:
-        Car() : marka("Neoplan"), power(5.2f), numberOfWheels(6) {
+        int NumCrew;
+        string TypeTransport;
+        Transport() {
         }
-        Car(string m, float p, int nw) : marka(m), power(p), numberOfWheels(nw) {
-        }
-        string getMarka() { return marka; }
-        void setMarka(string m) { marka = m; }
-        float getPower() {
-            return power;
-        }
-        void setPower(float p) {
-            power = p;
-        }
-        int getNumberOfWheels() {
-            return numberOfWheels;
-        }
-        void setNumberOfWheels(int n) {
-            numberOfWheels = n;
-        }
-        string toString() {
-            string r = marka + "\t" + to_string(power) + "\t" + to_string(numberOfWheels) + "\t";
-            return r;
+        Transport(int numCrew, string typeTransport) {
+            this->NumCrew = numCrew;
+            this->TypeTransport = typeTransport;
         }
     };
 
-    class PassengerTransport {
-    protected:
-        int flightNumber;
-        int numberOfPassengerSeats;
-    public:
-        PassengerTransport() : flightNumber(101), numberOfPassengerSeats(45) {}
-        PassengerTransport(int f, int n) : flightNumber(f), numberOfPassengerSeats(n) {}
-        int  getFlightNumber() { return flightNumber; }
-        void setFlightNumber(int f) { flightNumber = f; }
-        int getNumberOfPassengerSeats() { return numberOfPassengerSeats; }
-        void setnumberOfPassengerSeats(int n) { numberOfPassengerSeats = n; }
-        string toString() {
-            string r = to_string(flightNumber) + "\t" + to_string(numberOfPassengerSeats) + "\t";
-            return r;
-        }
-    };
-    class AutoBus : public Car, public  PassengerTransport
-    {
-        string busRoute;
-    public:
-        AutoBus() : busRoute("Kyiv-Chernivci") {}
-        AutoBus(string m, float p, int nw, int f, int n, string bs)
-            : Car(m, p, nw), PassengerTransport(f, n), busRoute(bs) {}
-        string getbusRoute() {
-            return busRoute;
-        }
-        void setbusRoute(string bs) { busRoute = bs; }
+    ostream& operator<<(ostream& os, Transport& n) {
+        cout << " Number of crew: " << n.NumCrew << endl << " Type of transport " << n.TypeTransport << endl;
+        return os;
+    }
+    istream& operator>>(istream& iso, Transport& n) {
+        cin >> n.NumCrew >> n.TypeTransport;
+        return iso;
+    }
 
-        string toString() {
-            string r = Car::toString() + PassengerTransport::toString() + busRoute;
-            return r;
+
+    class PassengerTransport : public Transport {
+    public:
+        int NumPassengers;
+        PassengerTransport() {
+        }
+        PassengerTransport(int numCrew, string typeTransport, int numPassengers) : Transport(numCrew, typeTransport) {
+            this->NumPassengers = numPassengers;
         }
     };
+
+    ostream& operator<<(ostream& os, PassengerTransport& n) {
+        cout << " Number of crew: " << n.NumCrew << endl << " Type of transport " << n.TypeTransport << endl << " Number of Passengers " << n.NumPassengers << endl;
+        return os;
+    }
+    istream& operator>>(istream& iso, PassengerTransport& n) {
+        cin >> n.NumCrew >> n.TypeTransport >> n.NumPassengers;
+        return iso;
+    }
+
+    class Ship : public Transport { 
+    public:
+        int Lifeboat;
+        int Lifebuoy;
+        Ship() {
+        }
+        Ship(int numCrew, string typeTransport, int lifeboat, int lifebuoy) : Transport(numCrew, typeTransport) {
+            this->Lifeboat = lifeboat;
+            this->Lifebuoy = lifebuoy;
+        }
+    };
+
+    ostream& operator<<(ostream& os, Ship& n) {
+        cout << " Number of crew: " << n.NumCrew << endl << " Type of transport " << n.TypeTransport << endl;
+        cout << " Number of Lifeboat " << n.Lifeboat << endl << " Number of Lifebuoy " << n.Lifebuoy << endl;
+        return os;
+    }
+    istream& operator>>(istream& iso, Ship& n) {
+        cin >> n.NumCrew >> n.TypeTransport >> n.Lifeboat >> n.Lifebuoy;
+        return iso;
+    }
+
+    class PassengerShip : public PassengerTransport, public Ship {
+    public:
+        int CabinNum;
+        PassengerShip() {
+        }
+        PassengerShip (int lifeboat, int lifebuoy, int numPassengers, int cabinNum) {
+            this->Lifeboat = lifeboat;
+            this->Lifebuoy = lifebuoy;
+            this->NumPassengers = numPassengers;
+            this->CabinNum = cabinNum;
+        }
+    };
+
+    ostream& operator<<(ostream& os, PassengerShip& n) {
+        cout << " Number of Lifeboat " << n.Lifeboat << endl << " Number of Lifeboat " << n.Lifeboat << endl;
+        cout << " Number of Passengers " << n.NumPassengers << endl << " Cabin numbers" << n.CabinNum << endl;
+        return os;
+    }
+    istream& operator>>(istream& iso, PassengerShip& n) {
+        cin >> n.Lifeboat >> n.Lifebuoy >> n.NumPassengers >> n.CabinNum;
+        return iso;
+    }
 
     int mainExample3()
     {
-        AutoBus def;
-        AutoBus lvCh("Iveko", 6.2f, 6, 301, 40, "Lviv-Chernivci");
-        AutoBus* pVnCn = new AutoBus();
-        pVnCn->setMarka("Ikarus");
-        pVnCn->setPower(7.2f);
-        pVnCn->setNumberOfWheels(6);
-        pVnCn->setFlightNumber(403);
-        pVnCn->setnumberOfPassengerSeats(42);
-        pVnCn->setbusRoute("Vinnicya-Chernivci");
-
-        cout << def.toString() << endl;
-        cout << lvCh.toString() << endl;
-        cout << pVnCn->toString() << endl;
+        Transport obj1 = Transport(470, "Airplane");
+        cout << "OBJ1: " << obj1 << endl;
+        PassengerTransport obj2 = PassengerTransport(3, "Trolley", 28);
+        cout << "OBJ2: " << obj2 << endl;
+        Ship obj3 = Ship(356, "Ship", 49, 289);
+        cout << "OBJ3: " << obj3 << endl;
+        PassengerShip obj4 = PassengerShip(187, 365, 678, 245);
+        cout << "OBJ4: " << obj4 << endl;
+      
         return 0;
     }
 
